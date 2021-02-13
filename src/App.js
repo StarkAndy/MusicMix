@@ -7,21 +7,18 @@
  */
 
 import React from 'react';
-import {SafeAreaView, StyleSheet, StatusBar, Dimensions,View} from 'react-native';
+import {
+  SafeAreaView,
+  StyleSheet,
+  StatusBar,
+  Dimensions,
+  View,
+} from 'react-native';
 
-import FlatCard from './component/FlatCard';
+import Routes from './routes';
 
 const App = () => {
-  return (
-    <>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <View style={{width: Dimensions.get('window').width}}>
-          <FlatCard label="Liked Songs" />
-        </View>
-      </SafeAreaView>
-    </>
-  );
+  return <Routes />;
 };
 
 export default App;
