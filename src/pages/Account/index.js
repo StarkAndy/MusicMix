@@ -1,11 +1,15 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View, Text,TouchableOpacity} from 'react-native';
 import Home from '../Home';
 
-const Account = () => {
+const Account = (props) => {
   return (
     <View>
-      <Home name="Hello" />
+    <TouchableOpacity 
+    onPress={()=>props.navigation.navigate('Settings')} 
+    style={{marginTop:15,justifyContent:'center'}}>
+      <Text>Settings</Text>
+    </TouchableOpacity>
     </View>
   );
 };

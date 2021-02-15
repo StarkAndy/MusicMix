@@ -1,21 +1,27 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
 
-import {Home, Account} from './links';
+import AuthNavigator from '../component/Login';
 
-const Stack = createStackNavigator();
+import AppNavigator from '../component/AppNavigator';
 
+import { StatusBar, Platform,View,Dimensions } from 'react-native';
+
+
+const window=Dimensions.get('window');
 const Routes = () => {
+  const [isLogin, setIsLogin] = useState(true);
   return (
+    <>
+    {
+      Platform.OS=='ios' && isLogin ? <View style={{height:window.height/8,backgroundColor:'transparent'}}></View> : null
+    }
+    <StatusBar barStyle='dark-content' backgroundColor='black' translucent={false} />
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="Account" component={Account} />
-      </Stack.Navigator>
+      {isLogin ? <AppNavigator /> : <AuthNavigator />}
     </NavigationContainer>
+    </>
   );
 };
-
 export default Routes;
