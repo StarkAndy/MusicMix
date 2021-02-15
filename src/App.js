@@ -6,7 +6,7 @@
  * @flow strict-local
  */
 
-import React from 'react';
+import React, {useState} from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -15,10 +15,19 @@ import {
   View,
 } from 'react-native';
 
+import {NavigationContainer} from '@react-navigation/native';
 import Routes from './routes';
+import BottomNavigation from './routes/bottomnavigaiton';
 
 const App = () => {
-  return <Routes />;
+  const [isEnabled, changeUseSate] = useState(true);
+  return (
+    <NavigationContainer>
+      <SafeAreaView style={{flex: 1}}>
+        {isEnabled ? <BottomNavigation /> : <Routes />}
+      </SafeAreaView>
+    </NavigationContainer>
+  );
 };
 
 export default App;
