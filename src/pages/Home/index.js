@@ -1,17 +1,36 @@
 import React from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
+import {connect} from 'react-redux';
 
-const Home = (props) => {
-  const test = props;
-  const hello=test;
+import {changeUserInfo} from './actions/action';
+class Home extends React.Component {
+  constructor(props) {
+    super(props);
 
-  return (
-    <View>
-      <TouchableOpacity onPress={() => props.navigation.navigate('Account')}>
-        <Text>Account</Text>
-      </TouchableOpacity>
-    </View>
-  );
+    this.props.saveUserInfo('Hello');
+  }
+  render() {
+    return (
+      <View>
+        <TouchableOpacity
+          onPress={() => this.props.navigation.navigate('Account')}>
+          <Text>Account</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
+}
+
+const mapStateToProps = (state) => {
+  return {
+    data: '',
+  };
 };
 
-export default Home;
+const mapDispatchState = (dispatch) => {
+  return {
+    saveUserInfo: (data) => dispatch(changeUserInfo(data)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchState)(Home);
