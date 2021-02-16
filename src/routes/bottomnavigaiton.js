@@ -2,7 +2,7 @@ import React from 'react';
 import {View, Text} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import {Home, Account} from './links';
+import {Home, Account, News} from './links';
 
 const Tabs = createBottomTabNavigator();
 
@@ -25,6 +25,17 @@ const bottomNavigation = () => {
         component={Account}
         options={{
           tabBarLabel: 'About',
+          tabBarIcon: ({color, size}) => (
+            <MaterialCommunityIcons name="account" color={color} size={size} />
+          ),
+        }}
+      />
+
+      <Tabs.Screen
+        name="News"
+        component={News}
+        options={{
+          tabBarLabel: 'News',
           tabBarIcon: ({color, size}) => (
             <MaterialCommunityIcons name="account" color={color} size={size} />
           ),

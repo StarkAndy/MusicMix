@@ -20,12 +20,20 @@ import Routes from './routes';
 import BottomNavigation from './routes/bottomnavigaiton';
 
 import {Provider} from 'react-redux';
-import {createStore} from 'redux';
+import {createStore, applyMiddleware, combineReducers} from 'redux';
+import createSagaMiddleware from 'redux-saga';
 
 import HomeReducer from './pages/Home/reducer';
+import NewsReducer from './pages/News/reducer/reducer';
+import logger from 'redux-logger';
 
-const store = createStore(HomeReducer);
+import rootSaga from './pages/News/saga';
 
+const sagaMiddleWear = createSagaMiddleware();
+const reducers = combineReducers({HomeReducer, NewsReducer});
+const store = createStore(reducers, applyMiddleware(sagaMiddleWear, logger));
+
+sagaMiddleWear.run(rootSaga);
 const App = () => {
   const [isEnabled, changeUseSate] = useState(true);
   return (
