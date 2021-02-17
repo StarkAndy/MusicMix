@@ -7,9 +7,15 @@ class Home extends React.Component {
   constructor(props) {
     super(props);
 
-    this.props.saveUserInfo('Hello');
+    this.props.saveUserInfo('Hello User');
+
   }
   render() {
+   
+    const fetchVal=JSON.stringify(this.props.data);
+
+    console.log('fetched data: '+fetchVal);
+
     return (
       <View>
         <TouchableOpacity
