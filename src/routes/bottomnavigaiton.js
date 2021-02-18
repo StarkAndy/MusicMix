@@ -1,20 +1,23 @@
 import React from 'react';
-import {View, Text} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import {Home, Account, News,UserRegistration} from './links';
+//import {Home, Account, News} from '../pages/links';
+import Account from '../pages/Account';
+import Home  from '../pages/Home';
+import News from '../pages/News';
+
 
 const Tabs = createBottomTabNavigator();
 
-const bottomNavigation = () => {
+const BottomNavigation = () => {
   return (
     <Tabs.Navigator>
       <Tabs.Screen
-        name="Registration"
-        component={UserRegistration}
+        name="Home"
+        component={Home}
         options={{
           activeTintColor: 'black',
-          tabBarLabel: 'Registration',
+          tabBarLabel: 'Home',
           tabBarIcon: ({color, size}) => (
             <MaterialCommunityIcons name="home" color={color} size={size} />
           ),
@@ -45,4 +48,4 @@ const bottomNavigation = () => {
   );
 };
 
-export default bottomNavigation;
+export default BottomNavigation;

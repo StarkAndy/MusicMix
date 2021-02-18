@@ -26,7 +26,8 @@ class News extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    data: state.NewsReducer.data.articles,
+    //data: state.NewsReducer.data.articles,
+    data: 'NO DATA',
   };
 };
 

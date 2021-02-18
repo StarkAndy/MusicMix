@@ -1,35 +1,38 @@
 import {takeLatest, put, all} from 'redux-saga/effects';
 import {
-  LOGIN_FAILED,
-  LOGIN_REQUEST,
-  LOGIN_SUCCESS,
+  REGISTER_FAILED,
+  REGISTER_REQUEST,
+  REGISTER_SUCCESS
 } from '../actions/actionstypes';
 
-import {getLoginSucess, getLoginFailed} from '../actions/action';
+import {userRegisterSuccess, userRegisterFailed} from '../actions/action';
 
-function* handleLogin() {
+function* handleUserRegister() {
   
   const json = yield fetch(
-    'https://api.mixcloud.com/spartacus/party-time/',
+    'https://jsonplaceholder.typicode.com/todos/1',
+  //  method: "GET",
   )
-    .then((response) => {
-      //response.json();
-      console.log(response.json());
-    //  yield put(LOGIN_SUCCESS,getLoginSucess(response.data));
-    })
+  .then((response) => 
+    response.json()
+  )
     .catch((error) => {
       errorHandle(error);
       console.log('ERROR====>'+ error);
     });
-
-  console.log('DATA==>', json);
-  yield put(getLoginSucess(json));
+    
+    console.log(json);
+    yield put(userRegisterSuccess(json));
 }
 
+function* handleSucessPayload(json){
+  console.log('RECEIVED JSON-PLACE-HOLDER RESPONSE: '+son);
+  yield put(userRegisterSuccess(json));
+}
 function* errorHandle(error){
-  yield put(LOGIN_FAILED,getLoginFailed(error));
+  yield put(REGISTER_FAILED,userRegisterFailed(error));
 }
 
- export default function* loginWatcher() {
-  yield takeLatest(LOGIN_REQUEST, handleLogin)
+ export default function* userRegisterWatcher() {
+  yield takeLatest(REGISTER_REQUEST, handleUserRegister)
 }

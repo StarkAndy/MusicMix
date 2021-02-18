@@ -1,17 +1,20 @@
-import {LOGIN_FAILED,LOGIN_REQUEST,LOGIN_SUCCESS} from './actionstypes';
+import {REGISTER_FAILED,REGISTER_REQUEST,REGISTER_SUCCESS} from './actionstypes';
 
-export const getLoginRequest=(username,pwd)=>({
-    type:LOGIN_REQUEST,
+export const doUserRegister=(username,pwd,phno,gender,dob)=>({
+    type:REGISTER_REQUEST,
     userid:username,
     password:pwd,
+    phone:phno,
+    gender:gender,
+    dob: dob,
 });
 
-export const getLoginSucess=(data)=>({
-    type:LOGIN_SUCCESS,
+export const userRegisterSuccess=(data)=>({
+    type:REGISTER_SUCCESS,
     payload: data,
 });
 
-export const getLoginFailed=(error)=>({
-    type:LOGIN_FAILED,
+export const userRegisterFailed=(error)=>({
+    type:REGISTER_FAILED,
     payload:error,
 });

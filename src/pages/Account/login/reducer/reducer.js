@@ -1,24 +1,24 @@
-import {REGISTER_REQUEST,REGISTER_SUCCESS,REGISTER_FAILED} from '../../registration/actions/actionstypes';
+import {LOGIN_FAILED,LOGIN_REQUEST,LOGIN_SUCCESS} from '../../login/actions/actionstypes';
 
-const INIT_STATE={
+const LOGIN_INIT_STATE={
     loading:false,
     data:'',
     error:'',
 };
 
-const reducer = (state = INIT_STATE, {type, payload}) => {
+const reducer = (state = LOGIN_INIT_STATE, {type, payload}) => {
     switch (type) {
-      case REGISTER_REQUEST:
-          console.log('#1 REGISTER REUEST  EXECUTING');
+      case LOGIN_REQUEST:
+          console.log('#1 LOGIN REUEST  EXECUTING');
         return {...state, loading: true};
   
-      case REGISTER_SUCCESS:
-        console.log('#2 REGISTER  EXECUTING')
+      case LOGIN_SUCCESS:
+        console.log('#2 LOGIN_SUCCESS  EXECUTING')
         console.log(payload);
         return {...state, loading: false, data: payload};
   
-      case REGISTER_FAILED:
-        console.log('#3 REGISTER EXECUTING')
+      case LOGIN_FAILED:
+        console.log('#3 LOGIN_FAILED  EXECUTING')
         //  console.log('login request failed / cancelled due to '+payload);
         return {...state, loading: false, error: payload};
   
