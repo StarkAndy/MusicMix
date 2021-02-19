@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import {connect} from 'react-redux';
 import {getLoginRequest} from '../login/actions/action';
+import AsyncStorage from '@react-native-community/async-storage';
 
 class Login extends React.Component {
   constructor(props) {
@@ -15,8 +16,19 @@ class Login extends React.Component {
   }
 
   componentDidUpdate() {
-    console.log('Login Status: ' + this.props.userId);
+    if (this.props.userId.length > 0) {
+      this.storeData(true);
+      this.props.navigation.navigate('Home');
+    }
   }
+
+  storeData = async (value) => {
+    try {
+      await AsyncStorage.setItem('loggedin', "true");
+    } catch (e) {
+      // saving error
+    }
+  };
 
   doLogin = () => {
     this.props.login('Laxman', 'test$1234');
@@ -54,8 +66,8 @@ const mapStateToProps = (state) => {
     // status: state.LoginReducer.status,
     //isloading: false,
     // data: state.LoginReducer.data,
-   //  userId:state.LoginReducer.data.userId,
-   userId: 'NO DATA',
+    //  userId:state.LoginReducer.data.userId,
+    userId: state.LoginReduer.data,
   };
 };
 
@@ -90,7 +102,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
   },
   titleStyle: {
-
     fontSize: 20,
     fontWeight: 'bold',
     padding: 7,

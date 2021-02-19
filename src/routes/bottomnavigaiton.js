@@ -3,9 +3,8 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 //import {Home, Account, News} from '../pages/links';
 import Account from '../pages/Account';
-import Home  from '../pages/Home';
+import Home from '../pages/Home';
 import News from '../pages/News';
-
 
 const Tabs = createBottomTabNavigator();
 

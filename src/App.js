@@ -7,9 +7,7 @@
  */
 
 import React, {useState} from 'react';
-import {
-  SafeAreaView,
-} from 'react-native';
+import {SafeAreaView} from 'react-native';
 
 import {NavigationContainer} from '@react-navigation/native';
 import BottomNavigation from './routes/bottomnavigaiton';
@@ -23,19 +21,25 @@ import createSagaMiddleware from 'redux-saga';
 import HomeReducer from './pages/Home/reducer';
 import NewsReducer from './pages/News/reducer/reducer';
 import RegisterReducer from './pages/Account/registration/reducer/reducer';
+import LoginReduer from './pages/Account/login/reducer/reducer';
 import logger from 'redux-logger';
 import rootSaga from './routes/sagas';
+import Route from './routes/route';
 
 const sagaMiddleWear = createSagaMiddleware();
 
-const reducers = combineReducers({HomeReducer, NewsReducer, RegisterReducer});
+const reducers = combineReducers({
+  HomeReducer,
+  NewsReducer,
+  RegisterReducer,
+  LoginReduer,
+});
 
 const store = createStore(reducers, applyMiddleware(sagaMiddleWear));
 
 sagaMiddleWear.run(rootSaga);
 
 const App = () => {
-
   //console.log('User Registration Status: '+this.props)
 
   //console.log(this.props.HomeReducer.userInfo);
@@ -44,11 +48,15 @@ const App = () => {
 
   //this.state.RegisterReducer.data ? changeUseSate(true) : changeUseSate(false);
 
+ const navigateWhenLogin=()=>{
+   alert("TEst")
+ }
+
   return (
     <Provider store={store}>
       <NavigationContainer>
         <SafeAreaView style={{flex: 1}}>
-          {isEnabled ? <BottomNavigation /> : <AuthNavigator />}
+          <Route />
         </SafeAreaView>
       </NavigationContainer>
     </Provider>
