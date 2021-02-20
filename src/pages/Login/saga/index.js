@@ -7,6 +7,7 @@ import {getLoginSucess, getLoginFailed} from '../actions/action';
 
 function* handleLogin() {
   
+  console.log('handleLogin');
   const json = yield fetch(
     'https://jsonplaceholder.typicode.com/users/1/posts/',
   )

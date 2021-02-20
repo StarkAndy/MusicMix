@@ -1,22 +1,39 @@
-import React from 'react';
+import React ,{useContext} from 'react';
 import {
   View,
   Text,
   TextInput,
   TouchableOpacity,
   StyleSheet,
+  NativeModules,
 } from 'react-native';
 import {connect} from 'react-redux';
-import {getLoginRequest} from '../login/actions/action';
+import {getLoginRequest} from './actions/action';
+import AsyncStorage from '@react-native-community/async-storage';
 
 class Login extends React.Component {
+
+  //const myContext = useContext(AppContext);
+
   constructor(props) {
     super(props);
   }
 
   componentDidUpdate() {
-    console.log('Login Status: ' + this.props.userId);
+    console.log('Login Status: ' + this.props.data.length);
+    this.storeData(this.props.data.length);
+
   }
+
+  storeData = async (value) => {
+    try {
+      await AsyncStorage.setItem('loggedIn', ''+value);
+      NativeModules.DevSettings.reload();
+    } catch (e) {
+      console.log('AsyncStore error: ' + e);
+      // saving error
+    }
+  };
 
   doLogin = () => {
     this.props.login('Laxman', 'test$1234');
@@ -24,38 +41,40 @@ class Login extends React.Component {
 
   render() {
     return (
-      <View style={styles.containerStyle}>
-        <View style={{flex: 1, justifyContent: 'center'}}>
-          <Text style={styles.titleStyle}>My Sportify App</Text>
-          <View style={styles.inputContainerStyle}>
-            <Text style={styles.textStyle}>Username</Text>
-            <TextInput
-              placeholder="Enter Username"
-              style={styles.textInputStyle}></TextInput>
-            <Text style={styles.textStyle}>Password</Text>
-            <TextInput
-              placeholder="Enter Password"
-              secureTextEntry={true}
-              style={styles.textInputStyle}></TextInput>
-            <TouchableOpacity
-              style={styles.loginBtnStyle}
-              onPress={() => this.doLogin()}>
-              <Text style={styles.loginBtnTextStyle}>Login</Text>
-            </TouchableOpacity>
+      <>
+          <View style={styles.containerStyle}>
+            <View style={{flex: 1, justifyContent: 'center'}}>
+              <Text style={styles.titleStyle}>My Sportify App</Text>
+              <View style={styles.inputContainerStyle}>
+                <Text style={styles.textStyle}>Username</Text>
+                <TextInput
+                  placeholder="Enter Username"
+                  style={styles.textInputStyle}></TextInput>
+                <Text style={styles.textStyle}>Password</Text>
+                <TextInput
+                  placeholder="Enter Password"
+                  secureTextEntry={true}
+                  style={styles.textInputStyle}></TextInput>
+                <TouchableOpacity
+                  style={styles.loginBtnStyle}
+                  onPress={() => this.doLogin()}>
+                  <Text style={styles.loginBtnTextStyle}>Login</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
           </View>
-        </View>
-      </View>
+      </>
+        
     );
-  }
+ }
 }
 
 const mapStateToProps = (state) => {
   return {
-    // status: state.LoginReducer.status,
+    error: state.LoginReducer.error,
     //isloading: false,
-    // data: state.LoginReducer.data,
-   //  userId:state.LoginReducer.data.userId,
-   userId: 'NO DATA',
+    data: state.LoginReducer.data,
+    userId: state.RegisterReducer.data.userId,
   };
 };
 
@@ -90,7 +109,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
   },
   titleStyle: {
-
     fontSize: 20,
     fontWeight: 'bold',
     padding: 7,

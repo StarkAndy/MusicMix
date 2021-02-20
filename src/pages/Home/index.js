@@ -2,26 +2,23 @@ import React from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 import {connect} from 'react-redux';
 
+
 import {changeUserInfo} from './actions/action';
 class Home extends React.Component {
   constructor(props) {
     super(props);
-
-    this.props.saveUserInfo('Hello User');
+    //this.props.saveUserInfo('Hello User');
 
   }
   render() {
    
-    const fetchVal=JSON.stringify(this.props.data);
-
-    console.log('fetched data: '+fetchVal);
-
     return (
       <View>
         <TouchableOpacity
           onPress={() => this.props.navigation.navigate('Account')}>
           <Text>Account</Text>
         </TouchableOpacity>
+        <Text>Posts Loaded</Text>
       </View>
     );
   }

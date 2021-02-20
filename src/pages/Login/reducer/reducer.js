@@ -1,4 +1,4 @@
-import {LOGIN_FAILED,LOGIN_REQUEST,LOGIN_SUCCESS} from '../../login/actions/actionstypes';
+import {LOGIN_FAILED,LOGIN_REQUEST,LOGIN_SUCCESS} from '../actions/actionstypes';
 
 const LOGIN_INIT_STATE={
     loading:false,

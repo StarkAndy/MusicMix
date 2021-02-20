@@ -1,5 +1,6 @@
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {createStackNavigator} from '@react-navigation/stack';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 //import {Home, Account, News} from '../pages/links';
 import Account from '../pages/Account';
@@ -8,6 +9,7 @@ import News from '../pages/News';
 
 
 const Tabs = createBottomTabNavigator();
+
 
 const BottomNavigation = () => {
   return (
@@ -27,7 +29,7 @@ const BottomNavigation = () => {
         name="Account"
         component={Account}
         options={{
-          tabBarLabel: 'About',
+          tabBarLabel: 'Account',
           tabBarIcon: ({color, size}) => (
             <MaterialCommunityIcons name="account" color={color} size={size} />
           ),
